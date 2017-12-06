@@ -10,6 +10,7 @@
 #define PARTICLE_FILTER_H_
 
 #include "helper_functions.h"
+#include <random>
 
 struct Particle {
 
@@ -28,9 +29,7 @@ struct Particle {
 class ParticleFilter {
 	
 	// Number of particles to draw
-	int num_particles; 
-	
-	
+	int num_particles;
 	
 	// Flag, if filter is initialized
 	bool is_initialized;
@@ -39,7 +38,9 @@ class ParticleFilter {
 	std::vector<double> weights;
 	
 public:
-	
+
+
+
 	// Set of current particles
 	std::vector<Particle> particles;
 
@@ -96,6 +97,7 @@ public:
 	 *   the new set of particles.
 	 */
 	void resample();
+    void resample0();
 
 	/*
 	 * Set a particles list of associations, along with the associations calculated world x,y coordinates

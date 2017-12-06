@@ -241,4 +241,9 @@ inline bool read_landmark_data(std::string filename, std::vector<LandmarkObs>& o
 	return true;
 }
 
+inline double gaussian_prob(double x1, double y1, double x2, double y2, double sx, double sy) {
+	return ( 0.5/(M_PI*sx*sy)) * exp( -( pow(x1-x2,2.0)/(2.0*pow(sx, 2.0)) + (pow(y1-y2,2.0)/(2.0*pow(sy, 2.0))) ) );
+}
+
+
 #endif /* HELPER_FUNCTIONS_H_ */
