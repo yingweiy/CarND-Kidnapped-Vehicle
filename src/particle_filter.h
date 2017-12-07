@@ -97,7 +97,6 @@ public:
 	 *   the new set of particles.
 	 */
 	void resample();
-    void resample0();
 
 	/*
 	 * Set a particles list of associations, along with the associations calculated world x,y coordinates
