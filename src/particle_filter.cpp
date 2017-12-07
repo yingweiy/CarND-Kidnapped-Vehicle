@@ -137,7 +137,7 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 
         for (LandmarkObs& obs: map_obs) {
             double prob;
-
+            prob = 0; //if not found, set the weight to 0.
             for (LandmarkObs& pred: predictions) {
                 if (pred.id == obs.id) {
                     prob = gaussian_prob(pred.x, pred.y, obs.x, obs.y, std_landmark[0], std_landmark[1]);
