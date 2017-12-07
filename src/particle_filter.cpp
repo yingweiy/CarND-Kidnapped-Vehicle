@@ -111,7 +111,7 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 	//   and the following is a good resource for the actual equation to implement (look at equation 
 	//   3.33
 	//   http://planning.cs.uiuc.edu/node99.html
-    // for each particle...
+
     for (Particle& p: particles) {
 
         // select predictions within sensor range
@@ -136,23 +136,16 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
         p.weight = 1.0;
 
         for (LandmarkObs& obs: map_obs) {
+            double prob;
 
-            // placeholders for observation and associated prediction coordinates
-            double px, py;
-
-            // get the x,y coordinates of the prediction associated with the current observation
             for (LandmarkObs& pred: predictions) {
                 if (pred.id == obs.id) {
-                    px = pred.x;
-                    py = pred.y;
+                    prob = gaussian_prob(pred.x, pred.y, obs.x, obs.y, std_landmark[0], std_landmark[1]);
                     break;
                 }
             }
 
-            double obs_w = gaussian_prob(px, py, obs.x, obs.y, std_landmark[0], std_landmark[1]);
-
-            // product of this obersvation weight with total observations weight
-            p.weight *= obs_w;
+            p.weight *= prob;
         }
     }
 }
